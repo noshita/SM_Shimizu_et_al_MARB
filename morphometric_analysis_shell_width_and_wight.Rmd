@@ -1,0 +1,62 @@
+---
+title: "Morphometric Analysis of Shell Shape Based on Shell Width and Height"
+author: "Koji Noshita"
+date: "Jan. 2nd, 2021"
+output: html_document
+---
+
+```{r, echo=FALSE, message=FALSE}
+library(here)
+library(readr)
+library(dplyr)
+library(ggplot2)
+```
+
+## Load shell height and width
+
+```{r}
+DIR_PATH_SHELL_HEIGHT_AND_WIDTH = paste(here::here(),"/data/shell_height_and_width/", sep = "")
+FILENAME = "Shell_MK.txt"
+
+data = readr::read_tsv(paste(DIR_PATH_SHELL_HEIGHT_AND_WIDTH, FILENAME, sep=""), col_types = "ddi")
+dataLog10 = log10(data[c("W","H")])
+
+dataLog10PC = prcomp(dataLog10, scale =F)
+
+dataset = cbind(data,dataLog10PC$x)
+dataset = dplyr::mutate(dataset,Loc=if_else(condition = Station < 1.5, true = "Monbetsu", false = "K2"  ))
+```
+
+## Plot height and width
+
+```{r}
+p0 <- ggplot(dataset,aes(x=W,y=H,color=Loc))
+p1 = p0 + geom_point()
+
+
+p1
+```
+
+## Plot PCs
+
+```{r}
+
+p0 <- ggplot(dataset,aes(x=PC1,y=PC2,color=Loc))
+p1 = p0 + geom_point() + coord_fixed(ratio=1)
+
+
+p1
+
+```
+## Plot PC2 as shape
+
+```{r}
+p0 <- ggplot(dataset,aes(x=PC2,fill=Loc))
+p1 = p0 + geom_histogram(position = "identity", alpha = 0.6)
+
+p1
+```
+
+```{r}
+wilcox.test(dataset$PC2~dataset$Loc)
+```
