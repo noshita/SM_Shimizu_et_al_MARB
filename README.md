@@ -1,14 +1,19 @@
 # Supplementary Materials
 
+## Files
 * morphometric_analysis_of_shell_height_and_width.Rmd
 * morphometric_analysis_of_aperture_shapes.Rmd
 * data
   * shell_height_and_width
   * aperture_shapes
-* SM_Shimizu_et_al_MARB.Rproj
+* SM_Shimizu_et_al_MARB.Rproj: RStudio Project file
 * renv
+* renv.lock
 
-## Usage
+## Quick start
+Please check `morphometric_analysis_of_shell_height_and_width.html` and `morphometric_analysis_of_aperture_shapes.html`, which are rendered html files from corresponding Rmds.
+
+## Installation and Usage
 
 ```sh
 git clone https://github.com/noshita/SM_Shimizu_et_al_MARB.git
