@@ -17,12 +17,16 @@ library(ggplot2)
 ## Load outline coordinate values
 
 ```{r Load, message=FALSE, warning=FALSE}
-DIR_PATH_APERTURE_SHAPES = paste(here::here(),"/data/aperture_shapes/", sep = "")
-FILE_LIST = "file_list.csv"
 
-filelist = readr::read_csv(paste(DIR_PATH_APERTURE_SHAPES, FILE_LIST, sep = ""), col_types="cc")
+DIR_REL_PATH = "data/aperture_shapes"
+FILE_LIST_NAME = "file_list.csv"
+
+dir_path_aperture_shapes = paste(here::here(), DIR_REL_PATH, sep = "/")
+file_list_path = paste(dir_path_aperture_shapes, FILE_LIST_NAME, sep = "/")
+filelist = readr::read_csv(file_list_path, col_types="cc")
+
 aperture_shape_coo = import_txt(
-  c(paste(DIR_PATH_APERTURE_SHAPES, filelist$filename[1:nrow(filelist)], sep=""))
+  c(paste(dir_path_aperture_shapes, filelist$filename[1:nrow(filelist)], sep="/"))
   ,header=FALSE, sep=",",col.names=c("x","y")
   )
 aperture_shape_coo = coo_close(Out(aperture_shape_coo))
@@ -37,8 +41,6 @@ panel(aperture_shape_coo, fac = "loc", names = TRUE)
 ```
 
 ## Elliptic Fourier analysis
-
-We do not apply normalizaion in this step because  coordinate values have been registered (i.e. standardized in terms of position, direction, and size).
 
 ```{r EFA}
 aperture_shape_coe <-efourier(aperture_shape_coo, 30, norm = FALSE)

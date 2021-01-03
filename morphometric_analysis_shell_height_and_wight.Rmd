@@ -15,10 +15,16 @@ library(ggplot2)
 ## Load shell height and width
 
 ```{r}
-DIR_PATH_SHELL_HEIGHT_AND_WIDTH = paste(here::here(),"/data/shell_height_and_width/", sep = "")
-FILENAME = "Shell_MK.txt"
+DIR_REL_PATH = "data/shell_height_and_width"
+FILE_NAME = "Shell_MK.txt"
 
-data = readr::read_tsv(paste(DIR_PATH_SHELL_HEIGHT_AND_WIDTH, FILENAME, sep=""), col_types = "ddi")
+file_path = paste(here::here(), DIR_REL_PATH, FILE_NAME, sep="/")
+data = readr::read_tsv(file_path, col_types = "ddi")
+```
+
+## Allometric analysis 
+
+```{r}
 dataLog10 = log10(data[c("W","H")])
 
 dataLog10PC = prcomp(dataLog10, scale =F)
@@ -27,7 +33,7 @@ dataset = cbind(data,dataLog10PC$x)
 dataset = dplyr::mutate(dataset,Loc=if_else(condition = Station < 1.5, true = "Monbetsu", false = "K2"  ))
 ```
 
-## Plot height and width
+## Plot shell height and width
 
 ```{r}
 p0 <- ggplot(dataset,aes(x=W,y=H,color=Loc))

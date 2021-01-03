@@ -197,19 +197,23 @@ summary {
 
 <div id="load-shell-height-and-width" class="section level2">
 <h2>Load shell height and width</h2>
-<pre class="r"><code>DIR_PATH_SHELL_HEIGHT_AND_WIDTH = paste(here::here(),&quot;/data/shell_height_and_width/&quot;, sep = &quot;&quot;)
-FILENAME = &quot;Shell_MK.txt&quot;
+<pre class="r"><code>DIR_REL_PATH = &quot;data/shell_height_and_width&quot;
+FILE_NAME = &quot;Shell_MK.txt&quot;
 
-data = readr::read_tsv(paste(DIR_PATH_SHELL_HEIGHT_AND_WIDTH, FILENAME, sep=&quot;&quot;), col_types = &quot;ddi&quot;)
-dataLog10 = log10(data[c(&quot;W&quot;,&quot;H&quot;)])
+file_path = paste(here::here(), DIR_REL_PATH, FILE_NAME, sep=&quot;/&quot;)
+data = readr::read_tsv(file_path, col_types = &quot;ddi&quot;)</code></pre>
+</div>
+<div id="allometric-analysis" class="section level2">
+<h2>Allometric analysis</h2>
+<pre class="r"><code>dataLog10 = log10(data[c(&quot;W&quot;,&quot;H&quot;)])
 
 dataLog10PC = prcomp(dataLog10, scale =F)
 
 dataset = cbind(data,dataLog10PC$x)
 dataset = dplyr::mutate(dataset,Loc=if_else(condition = Station &lt; 1.5, true = &quot;Monbetsu&quot;, false = &quot;K2&quot;  ))</code></pre>
 </div>
-<div id="plot-height-and-width" class="section level2">
-<h2>Plot height and width</h2>
+<div id="plot-shell-height-and-width" class="section level2">
+<h2>Plot shell height and width</h2>
 <pre class="r"><code>p0 &lt;- ggplot(dataset,aes(x=W,y=H,color=Loc))
 p1 = p0 + geom_point()
 
