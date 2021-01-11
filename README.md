@@ -20,3 +20,6 @@ git clone https://github.com/noshita/SM_Shimizu_et_al_MARB.git
 ```
 
 Then, open `SM_Shimizu_et_al_MARB.Rproj` in RStudio and restore libraries by using renv.
+
+## License
+These supplementary materials are licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) License.
