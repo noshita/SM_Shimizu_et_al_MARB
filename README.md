@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4432031.svg)](https://doi.org/10.5281/zenodo.4432031)
 
-Shimizu, K., Noshita, K., Kimoto, K. & Sasaki, T. Phylogeography and shell morphology of the pelagic snail Limacina helicina in the Okhotsk Sea and western North Pacific. *Mar Biodivers* **51**, 22 (2021). https://doi.org/10.1007/s12526-021-01166-z
+Shimizu, K., Noshita, K., Kimoto, K. & Sasaki, T. Phylogeography and shell morphology of the pelagic snail *Limacina helicina* in the Okhotsk Sea and western North Pacific. *Mar. Biodivers.* **51**, 22 (2021). https://doi.org/10.1007/s12526-021-01166-z
 
 ## Files
 * morphometric_analysis_of_shell_height_and_width.Rmd
